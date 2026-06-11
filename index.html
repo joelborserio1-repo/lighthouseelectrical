@@ -3,12 +3,15 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta name="theme-color" content="#0E2238" />
+<meta name="theme-color" content="#0e2338" />
 <title>Lighthouse Electrical | Premium Electrical Services Newcastle</title>
 <meta name="description" content="Premium electrical, solar and battery solutions across residential and commercial projects in Newcastle, NSW. Reliable electrical done properly." />
 
+<link rel="canonical" href="https://lighthouseelec.com.au/" />
+
 <!-- Social share / link preview (Facebook, WhatsApp, LinkedIn, X) -->
 <meta property="og:type" content="website" />
+<meta property="og:url" content="https://lighthouseelec.com.au/" />
 <meta property="og:site_name" content="Lighthouse Electrical" />
 <meta property="og:title" content="Lighthouse Electrical | Premium Electrical Services Newcastle" />
 <meta property="og:description" content="Premium electrical, solar and battery solutions across residential and commercial projects in Newcastle, NSW. Reliable electrical done properly." />
@@ -20,6 +23,26 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <!-- PLACEHOLDER FONT: Schibsted Grotesk stands in for your real brand font. Swap the <link> + --font tokens once confirmed. -->
 <link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Electrician",
+  "name": "Lighthouse Electrical",
+  "url": "https://lighthouseelec.com.au/",
+  "telephone": "+61451020862",
+  "email": "sales@lighthouseelec.com.au",
+  "description": "Premium electrical, solar and battery solutions across residential and commercial projects in Newcastle, NSW.",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Newcastle",
+    "addressRegion": "NSW",
+    "postalCode": "2300",
+    "addressCountry": "AU"
+  },
+  "areaServed": ["Newcastle", "Lake Macquarie", "Maitland", "Port Stephens", "Hunter Valley", "Central Coast"]
+}
+</script>
 
 <style>
 /* ============================================================
@@ -113,6 +136,7 @@ section{position:relative; z-index:1}
 .brand{display:flex; align-items:center; gap:10px; margin-right:auto}
 .wordmark{font-size:21px; font-weight:800; letter-spacing:-.02em; color:var(--text); white-space:nowrap; line-height:1}
 .wordmark-accent{color:var(--accent)}
+.wm-ic{width:20px; height:20px; flex:none; color:var(--accent); filter:drop-shadow(0 0 8px var(--glow))}
 .nav-links{display:flex; gap:var(--s6); align-items:center}
 .nav-links a{font-size:14.5px; color:var(--text-dim); position:relative; padding:6px 0; letter-spacing:.01em}
 .nav-links a::after{content:""; position:absolute; left:0; right:0; bottom:0; height:1.5px; background:var(--accent);
@@ -128,7 +152,7 @@ section{position:relative; z-index:1}
   border:1px solid transparent; cursor:pointer; position:relative; will-change:transform;
   transition:transform .25s var(--ease-spring), box-shadow .35s var(--ease-out), background .3s, color .3s, border-color .3s}
 .btn-primary{background:var(--accent); color:var(--on-accent); box-shadow:0 0 0 0 var(--glow)}
-.btn-primary:hover{box-shadow:0 12px 40px -8px var(--glow), 0 0 0 4px var(--glow-soft)}
+.btn-primary:hover{background:var(--accent-bright); box-shadow:0 12px 40px -8px var(--glow), 0 0 0 4px var(--glow-soft)}
 .btn-ghost{background:transparent; color:var(--text); border-color:var(--line-strong)}
 .btn-ghost:hover{border-color:var(--accent); color:#fff}
 .btn .arr{transition:transform .3s var(--ease-spring)}
@@ -158,23 +182,13 @@ h1.hero-title{font-size:clamp(40px, 7vw, 84px); line-height:1.02; letter-spacing
 /* signature SVG panel */
 .hero-art{position:relative; aspect-ratio:1/1; width:100%}
 .hero-art svg{position:absolute; inset:0; width:100%; height:100%; overflow:visible}
-.beam{position:absolute; inset:0; pointer-events:none; overflow:hidden; border-radius:50%}
-.beam::before{content:""; position:absolute; left:50%; top:50%; width:160%; height:62%;
-  transform:translate(-50%,-50%) rotate(0deg); transform-origin:center;
-  background:conic-gradient(from 90deg at 50% 50%, transparent 0 6%, var(--glow-soft) 12%, transparent 24%);
-  filter:blur(2px); animation:sweep 7s linear infinite; opacity:.9}
-@keyframes sweep{to{transform:translate(-50%,-50%) rotate(360deg)}}
-
 .draw{stroke:var(--accent); fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round;
   filter:drop-shadow(0 0 6px var(--glow));
   stroke-dasharray:1; stroke-dashoffset:1;
   animation:draw 2.6s var(--ease-out) .4s forwards}
 .draw.d2{animation-delay:.9s} .draw.d3{animation-delay:1.5s}
 @keyframes draw{to{stroke-dashoffset:0}}
-.node{fill:var(--accent); filter:drop-shadow(0 0 8px var(--glow)); opacity:0; animation:nodeIn .5s var(--ease-spring) forwards}
 .ring{fill:none; stroke:var(--line-strong); stroke-width:1.2}
-@keyframes nodeIn{from{opacity:0; transform:scale(0)}to{opacity:1; transform:scale(1)}}
-.travel{fill:#fff; filter:drop-shadow(0 0 10px var(--accent)); offset-rotate:0deg}
 
 /* --- Blayke signature scene: solar -> battery -> home --- */
 .raygrp{transform-box:fill-box; transform-origin:center; animation:rayspin 30s linear infinite}
@@ -275,6 +289,8 @@ h2{font-size:clamp(30px,4.4vw,52px); line-height:1.04; letter-spacing:-.022em; f
 .shake{animation:shake .4s}
 @keyframes shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
 .form .btn-primary{width:100%; margin-top:6px}
+.form-status{margin:14px 0 0; font-size:14px; line-height:1.5; color:#FF9A9A; text-align:center}
+.hp{position:absolute; left:-9999px; opacity:0; pointer-events:none}
 
 .form-success{position:absolute; inset:0; background:linear-gradient(180deg, rgba(16,41,67,.97), rgba(10,26,43,.97));
   display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:32px;
@@ -291,7 +307,7 @@ h2{font-size:clamp(30px,4.4vw,52px); line-height:1.04; letter-spacing:-.022em; f
 /* ============================================================ FOOTER */
 footer{border-top:1px solid var(--line); margin-top:var(--s10); padding:var(--s9) 0 var(--s7); position:relative; z-index:1}
 .foot-grid{display:grid; grid-template-columns:1.6fr 1fr 1fr 1fr; gap:var(--s7)}
-.foot-wordmark{display:inline-block; margin-bottom:18px; font-size:19px}
+.foot-wordmark{display:inline-flex; align-items:center; gap:8px; margin-bottom:18px; font-size:19px}
 .foot-brand p{color:var(--text-muted); font-size:14.5px; line-height:1.6; max-width:34ch}
 .foot h4{font-size:13px; letter-spacing:.12em; text-transform:uppercase; color:var(--text-dim); margin:0 0 16px; font-weight:600}
 .foot ul{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:11px}
@@ -355,25 +371,24 @@ footer{border-top:1px solid var(--line); margin-top:var(--s10); padding:var(--s9
   *,*::before,*::after{animation:none !important; transition:none !important}
   .reveal,.hl{opacity:1 !important; transform:none !important}
   .draw{stroke-dashoffset:0 !important}
-  .node{opacity:1 !important}
   .sun,.rays,.win{opacity:1 !important}
   .cell{opacity:.85 !important}
   .bar{opacity:1 !important}
   .smil{display:none !important}
   .check circle,.check path{stroke-dashoffset:0 !important}
-  .beam::before{display:none}
   .bg-field::after{opacity:.5}
 }
 </style>
 </head>
 <body>
-<a class="skip" href="#services">Skip to content</a>
+<a class="skip" href="#top">Skip to content</a>
 <div class="bg-field" aria-hidden="true"></div>
 
 <!-- ============ NAV ============ -->
 <header class="nav" id="nav">
   <div class="nav-inner">
     <a class="brand" href="#top" aria-label="Lighthouse Electrical home">
+      <svg class="wm-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2L4.5 13.5H10L9 22l8.5-11.5H12L13 2z" fill="currentColor"/></svg>
       <span class="wordmark">Lighthouse <span class="wordmark-accent">Electrical</span></span>
     </a>
     <nav class="nav-links" aria-label="Primary">
@@ -390,7 +405,7 @@ footer{border-top:1px solid var(--line); margin-top:var(--s10); padding:var(--s9
 </header>
 
 <!-- ============ HERO ============ -->
-<main id="top">
+<main id="top" tabindex="-1">
 <section class="hero" aria-label="Introduction">
   <div class="wrap hero-grid">
     <div class="hero-copy">
@@ -566,6 +581,7 @@ footer{border-top:1px solid var(--line); margin-top:var(--s10); padding:var(--s9
     <div class="form reveal" data-d="2">
       <h3>Request a Quote</h3>
       <form id="quoteForm" novalidate>
+        <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
         <div class="row2">
           <div class="field"><label for="f-name">Name</label><input id="f-name" name="name" type="text" autocomplete="name" required /><div class="err">Please enter your name.</div></div>
           <div class="field"><label for="f-phone">Phone</label><input id="f-phone" name="phone" type="tel" autocomplete="tel" required /><div class="err">Please enter a contact number.</div></div>
@@ -581,10 +597,11 @@ footer{border-top:1px solid var(--line); margin-top:var(--s10); padding:var(--s9
         </div>
         <div class="field"><label for="f-msg">Message</label><textarea id="f-msg" name="message" placeholder="Tell us about your project…"></textarea><div class="err"></div></div>
         <button class="btn btn-primary min44" type="submit">Send Message <span class="arr" aria-hidden="true">&rarr;</span></button>
+        <p class="form-status" id="formStatus" role="alert" hidden></p>
       </form>
       <div class="form-success" id="formSuccess" role="status" aria-live="polite">
         <svg class="check" viewBox="0 0 52 52"><circle cx="26" cy="26" r="24"/><path d="M16 27l7 7 14-15"/></svg>
-        <h3>Thanks — we&rsquo;ll be in touch.</h3>
+        <h3 id="formSuccessTitle" tabindex="-1">Thanks — we&rsquo;ll be in touch.</h3>
         <p>Your request has reached Lighthouse Electrical. We&rsquo;ll get back to you shortly with your free quote.</p>
       </div>
     </div>
@@ -596,7 +613,7 @@ footer{border-top:1px solid var(--line); margin-top:var(--s10); padding:var(--s9
 <footer aria-label="Footer">
   <div class="wrap foot-grid">
     <div class="foot-brand">
-      <span class="wordmark foot-wordmark">Lighthouse <span class="wordmark-accent">Electrical</span></span>
+      <span class="wordmark foot-wordmark"><svg class="wm-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2L4.5 13.5H10L9 22l8.5-11.5H12L13 2z" fill="currentColor"/></svg>Lighthouse&nbsp;<span class="wordmark-accent">Electrical</span></span>
       <p>Premium electrical, solar and battery solutions across residential and commercial projects in Newcastle.</p>
     </div>
     <div class="foot"><h4>Quick Links</h4><ul>
@@ -717,8 +734,11 @@ footer{border-top:1px solid var(--line); margin-top:var(--s10); padding:var(--s9
       if(input) input.addEventListener("blur", function(){ validate(f); });
     });
     var submitBtn = form.querySelector("button[type='submit']");
+    var statusEl = document.getElementById("formStatus");
+    function showError(msg){ statusEl.textContent = msg; statusEl.hidden = false; }
     form.addEventListener("submit", function(ev){
       ev.preventDefault();
+      statusEl.hidden = true; statusEl.textContent = "";
       var fields=Array.prototype.slice.call(form.querySelectorAll(".field"));
       var allOk=true, firstBad=null;
       fields.forEach(function(f){ var ok=validate(f); if(!ok){ allOk=false; if(!firstBad) firstBad=f; }});
@@ -744,12 +764,13 @@ footer{border-top:1px solid var(--line); margin-top:var(--s10); padding:var(--s9
           if(res.success){
             document.getElementById("formSuccess").classList.add("show");
             form.reset();
+            var t=document.getElementById("formSuccessTitle"); if(t) t.focus();
           } else {
-            window.alert("Sorry — something went wrong: " + (res.message || "please try again or call us."));
+            showError("Sorry — something went wrong: " + (res.message || "please try again or call us on 0451 020 862."));
           }
         })
         .catch(function(){
-          window.alert("Sorry — your message didn't send. Please try again or call us on 0451 020 862.");
+          showError("Sorry — your message didn't send. Please try again or call us on 0451 020 862.");
         })
         .finally(function(){
           submitBtn.innerHTML = originalHTML;
