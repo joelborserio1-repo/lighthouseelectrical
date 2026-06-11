@@ -133,10 +133,7 @@ section{position:relative; z-index:1}
   display:flex; align-items:center; gap:var(--s5); transition:padding .35s var(--ease-out)}
 .nav.scrolled{background:rgba(8,21,35,.72); backdrop-filter:blur(14px) saturate(140%); -webkit-backdrop-filter:blur(14px) saturate(140%); border-bottom:1px solid var(--line)}
 .nav.scrolled .nav-inner{padding-top:12px; padding-bottom:12px}
-.brand{display:flex; align-items:center; gap:10px; margin-right:auto}
-.wordmark{font-size:21px; font-weight:800; letter-spacing:-.02em; color:var(--text); white-space:nowrap; line-height:1}
-.wordmark-accent{color:var(--accent)}
-.wm-ic{width:20px; height:20px; flex:none; color:var(--accent); filter:drop-shadow(0 0 8px var(--glow))}
+.brand{margin-right:auto}
 .nav-links{display:flex; gap:var(--s6); align-items:center}
 .nav-links a{font-size:14.5px; color:var(--text-dim); position:relative; padding:6px 0; letter-spacing:.01em}
 .nav-links a::after{content:""; position:absolute; left:0; right:0; bottom:0; height:1.5px; background:var(--accent);
@@ -307,7 +304,6 @@ h2{font-size:clamp(30px,4.4vw,52px); line-height:1.04; letter-spacing:-.022em; f
 /* ============================================================ FOOTER */
 footer{border-top:1px solid var(--line); margin-top:var(--s10); padding:var(--s9) 0 var(--s7); position:relative; z-index:1}
 .foot-grid{display:grid; grid-template-columns:1.6fr 1fr 1fr 1fr; gap:var(--s7)}
-.foot-wordmark{display:inline-flex; align-items:center; gap:8px; margin-bottom:18px; font-size:19px}
 .foot-brand p{color:var(--text-muted); font-size:14.5px; line-height:1.6; max-width:34ch}
 .foot h4{font-size:13px; letter-spacing:.12em; text-transform:uppercase; color:var(--text-dim); margin:0 0 16px; font-weight:600}
 .foot ul{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:11px}
@@ -387,10 +383,7 @@ footer{border-top:1px solid var(--line); margin-top:var(--s10); padding:var(--s9
 <!-- ============ NAV ============ -->
 <header class="nav" id="nav">
   <div class="nav-inner">
-    <a class="brand" href="#top" aria-label="Lighthouse Electrical home">
-      <svg class="wm-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2L4.5 13.5H10L9 22l8.5-11.5H12L13 2z" fill="currentColor"/></svg>
-      <span class="wordmark">Lighthouse <span class="wordmark-accent">Electrical</span></span>
-    </a>
+    <a class="brand" href="#top" aria-label="Lighthouse Electrical home"></a>
     <nav class="nav-links" aria-label="Primary">
       <a href="#services">Services</a>
       <a href="#about">About</a>
@@ -613,7 +606,6 @@ footer{border-top:1px solid var(--line); margin-top:var(--s10); padding:var(--s9
 <footer aria-label="Footer">
   <div class="wrap foot-grid">
     <div class="foot-brand">
-      <span class="wordmark foot-wordmark"><svg class="wm-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2L4.5 13.5H10L9 22l8.5-11.5H12L13 2z" fill="currentColor"/></svg>Lighthouse&nbsp;<span class="wordmark-accent">Electrical</span></span>
       <p>Premium electrical, solar and battery solutions across residential and commercial projects in Newcastle.</p>
     </div>
     <div class="foot"><h4>Quick Links</h4><ul>
