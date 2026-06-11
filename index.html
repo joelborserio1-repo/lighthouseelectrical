@@ -1,0 +1,726 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="theme-color" content="#0E2238" />
+<title>Lighthouse Electrical | Premium Electrical Services Newcastle</title>
+<meta name="description" content="Premium electrical, solar and battery solutions across residential and commercial projects in Newcastle, NSW. Reliable electrical done properly." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<!-- PLACEHOLDER FONT: Schibsted Grotesk stands in for your real brand font. Swap the <link> + --font tokens once confirmed. -->
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+<style>
+/* ============================================================
+   DESIGN TOKENS  —  brand: navy #0e2338 (bg) + gold #c29540 (accent).
+   Both supplied by client, verbatim. Neutrals + states derived from them.
+   No third hue. "Light" in the hero = warm gold (the lighthouse lamp).
+   ============================================================ */
+:root{
+  --navy:        #0e2338;          /* client bg / brand */
+  --navy-950:    #081421;          /* deepest, for depth */
+  --navy-900:    #0a1a2b;
+  --navy-850:    #0c1e31;
+  --navy-800:    #0e2338;          /* = brand */
+  --navy-surface:#112a45;          /* raised card */
+  --navy-600:    #173352;
+  --line:        rgba(226,232,240,0.09);
+  --line-strong: rgba(226,232,240,0.16);
+
+  --text:        #EEF1F6;          /* off-white */
+  --text-dim:    #B7C2D0;
+  --text-muted:  #8B99A9;          /* >4.5:1 on navy */
+
+  /* gold accent + warm "lamp" glow, all derived from #c29540 */
+  --accent:      #c29540;          /* client buttons / accent */
+  --accent-bright:#d8af5e;         /* hover / lit highlight */
+  --on-accent:   #0e2338;          /* text on gold */
+  --glow:        rgba(194,149,64,0.50);
+  --glow-soft:   rgba(194,149,64,0.16);
+
+  --font:        "Schibsted Grotesk", ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+
+  --maxw: 1200px;
+  --gutter: clamp(20px, 5vw, 64px);
+  --r: 14px;
+
+  /* spacing scale */
+  --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:24px; --s6:32px; --s7:48px; --s8:64px; --s9:96px; --s10:140px;
+
+  --ease-spring: cubic-bezier(.22,1.18,.36,1);
+  --ease-out:    cubic-bezier(.16,1,.3,1);
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth; -webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{
+  margin:0; font-family:var(--font); color:var(--text);
+  background:var(--navy);
+  line-height:1.5; -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  overflow-x:hidden;
+}
+a{color:inherit; text-decoration:none}
+img{display:block; max-width:100%}
+button{font-family:inherit}
+
+/* atmospheric base layer: deep navy + faint grid + top glow. transform/opacity safe. */
+.bg-field{position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden}
+.bg-field::before{ /* grid */
+  content:""; position:absolute; inset:-2px;
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size:64px 64px;
+  -webkit-mask-image:radial-gradient(120% 80% at 50% 0%, #000 30%, transparent 78%);
+          mask-image:radial-gradient(120% 80% at 50% 0%, #000 30%, transparent 78%);
+  opacity:.5;
+}
+.bg-field::after{ /* lighthouse-top glow */
+  content:""; position:absolute; left:50%; top:-30vh; width:120vw; height:90vh; transform:translateX(-50%);
+  background:radial-gradient(closest-side, var(--glow-soft), transparent 70%);
+  opacity:.9;
+}
+
+.wrap{max-width:var(--maxw); margin-inline:auto; padding-inline:var(--gutter)}
+section{position:relative; z-index:1}
+
+/* skip link */
+.skip{position:absolute; left:-999px; top:8px; z-index:200; background:var(--navy-surface);
+  color:var(--text); padding:10px 16px; border-radius:10px; border:1px solid var(--line-strong)}
+.skip:focus{left:12px}
+
+/* ---------- focus visibility ---------- */
+:focus-visible{outline:2px solid var(--accent); outline-offset:3px; border-radius:6px}
+
+/* ============================================================ NAV */
+.nav{position:fixed; inset:0 0 auto 0; z-index:100; transition:background .4s var(--ease-out), border-color .4s var(--ease-out)}
+.nav-inner{max-width:var(--maxw); margin-inline:auto; padding:18px var(--gutter);
+  display:flex; align-items:center; gap:var(--s5); transition:padding .35s var(--ease-out)}
+.nav.scrolled{background:rgba(8,21,35,.72); backdrop-filter:blur(14px) saturate(140%); -webkit-backdrop-filter:blur(14px) saturate(140%); border-bottom:1px solid var(--line)}
+.nav.scrolled .nav-inner{padding-top:12px; padding-bottom:12px}
+.brand{display:flex; align-items:center; gap:10px; margin-right:auto}
+.brand img{height:34px; width:auto}
+.nav-links{display:flex; gap:var(--s6); align-items:center}
+.nav-links a{font-size:14.5px; color:var(--text-dim); position:relative; padding:6px 0; letter-spacing:.01em}
+.nav-links a::after{content:""; position:absolute; left:0; right:0; bottom:0; height:1.5px; background:var(--accent);
+  transform:scaleX(0); transform-origin:left; transition:transform .35s var(--ease-out); border-radius:2px}
+.nav-links a:hover{color:var(--text)}
+.nav-links a:hover::after{transform:scaleX(1)}
+.nav-tel{font-size:14.5px; color:var(--text); font-weight:600; white-space:nowrap}
+.nav-actions{display:flex; align-items:center; gap:var(--s5)}
+
+/* ---------- buttons ---------- */
+.btn{display:inline-flex; align-items:center; justify-content:center; gap:10px;
+  padding:14px 26px; border-radius:999px; font-weight:600; font-size:15px; letter-spacing:.01em;
+  border:1px solid transparent; cursor:pointer; position:relative; will-change:transform;
+  transition:transform .25s var(--ease-spring), box-shadow .35s var(--ease-out), background .3s, color .3s, border-color .3s}
+.btn-primary{background:var(--accent); color:var(--on-accent); box-shadow:0 0 0 0 var(--glow)}
+.btn-primary:hover{box-shadow:0 12px 40px -8px var(--glow), 0 0 0 4px var(--glow-soft)}
+.btn-ghost{background:transparent; color:var(--text); border-color:var(--line-strong)}
+.btn-ghost:hover{border-color:var(--accent); color:#fff}
+.btn .arr{transition:transform .3s var(--ease-spring)}
+.btn:hover .arr{transform:translateX(4px)}
+.btn:active{transform:scale(.97)}
+.min44{min-height:44px; min-width:44px}
+
+/* ============================================================ HERO */
+.hero{min-height:100svh; display:flex; align-items:center; padding:120px 0 80px; overflow:hidden}
+.hero-grid{display:grid; grid-template-columns:1.15fr .85fr; gap:var(--s8); align-items:center; width:100%}
+.eyebrow{display:inline-flex; align-items:center; gap:10px; font-size:13px; letter-spacing:.16em;
+  text-transform:uppercase; color:var(--accent); font-weight:600}
+.eyebrow .dot{width:7px; height:7px; border-radius:50%; background:var(--accent); box-shadow:0 0 12px var(--glow);
+  animation:pulse 2.4s var(--ease-out) infinite}
+@keyframes pulse{0%,100%{opacity:.5; transform:scale(.85)}50%{opacity:1; transform:scale(1.25)}}
+
+h1.hero-title{font-size:clamp(40px, 7vw, 84px); line-height:1.02; letter-spacing:-.025em; font-weight:800;
+  margin:22px 0 0; max-width:14ch}
+.hero-title .ln{display:block; overflow:hidden}
+.hero-title .ln > span{display:inline-block}
+.hero-title .grad{background:linear-gradient(180deg,#ffffff, #C4CDD8); -webkit-background-clip:text; background-clip:text; color:transparent}
+.hero-sub{margin:26px 0 0; font-size:clamp(16px,1.7vw,19px); color:var(--text-dim); max-width:46ch; line-height:1.6}
+.hero-cta{display:flex; gap:16px; margin-top:38px; flex-wrap:wrap}
+.hero-trust{margin-top:34px; display:flex; align-items:center; gap:18px; color:var(--text-muted); font-size:13.5px; flex-wrap:wrap}
+.hero-trust .sep{width:4px;height:4px;border-radius:50%;background:var(--text-muted);opacity:.6}
+
+/* signature SVG panel */
+.hero-art{position:relative; aspect-ratio:1/1; width:100%}
+.hero-art svg{position:absolute; inset:0; width:100%; height:100%; overflow:visible}
+.beam{position:absolute; inset:0; pointer-events:none; overflow:hidden; border-radius:50%}
+.beam::before{content:""; position:absolute; left:50%; top:50%; width:160%; height:62%;
+  transform:translate(-50%,-50%) rotate(0deg); transform-origin:center;
+  background:conic-gradient(from 90deg at 50% 50%, transparent 0 6%, var(--glow-soft) 12%, transparent 24%);
+  filter:blur(2px); animation:sweep 7s linear infinite; opacity:.9}
+@keyframes sweep{to{transform:translate(-50%,-50%) rotate(360deg)}}
+
+.draw{stroke:var(--accent); fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round;
+  filter:drop-shadow(0 0 6px var(--glow));
+  stroke-dasharray:1; stroke-dashoffset:1;
+  animation:draw 2.6s var(--ease-out) .4s forwards}
+.draw.d2{animation-delay:.9s} .draw.d3{animation-delay:1.5s}
+@keyframes draw{to{stroke-dashoffset:0}}
+.node{fill:var(--accent); filter:drop-shadow(0 0 8px var(--glow)); opacity:0; animation:nodeIn .5s var(--ease-spring) forwards}
+.ring{fill:none; stroke:var(--line-strong); stroke-width:1.2}
+@keyframes nodeIn{from{opacity:0; transform:scale(0)}to{opacity:1; transform:scale(1)}}
+.travel{fill:#fff; filter:drop-shadow(0 0 10px var(--accent)); offset-rotate:0deg}
+
+/* --- Blayke signature scene: solar -> battery -> home --- */
+.raygrp{transform-box:fill-box; transform-origin:center; animation:rayspin 30s linear infinite}
+.rays{opacity:0; animation:glowOn 1s var(--ease-out) .8s forwards}
+.ray{stroke:var(--accent); stroke-width:2.4; stroke-linecap:round; filter:drop-shadow(0 0 4px var(--glow))}
+.sun{fill:var(--accent); filter:drop-shadow(0 0 18px var(--glow)); opacity:0; animation:glowOn .8s var(--ease-out) .5s forwards}
+.cell{fill:var(--accent); filter:drop-shadow(0 0 6px var(--glow)); opacity:0; animation:cellOn .5s var(--ease-out) forwards}
+.bar{fill:var(--accent); opacity:.12; filter:drop-shadow(0 0 5px var(--glow)); animation:barOn .45s var(--ease-out) forwards}
+.win{fill:var(--accent); filter:drop-shadow(0 0 7px var(--glow)); opacity:0; animation:glowOn .6s var(--ease-out) forwards}
+.pulse{fill:#fff; filter:drop-shadow(0 0 8px var(--accent))}
+@keyframes glowOn{to{opacity:1}}
+@keyframes cellOn{to{opacity:.85}}
+@keyframes barOn{to{opacity:1}}
+@keyframes rayspin{to{transform:rotate(360deg)}}
+
+.scrollcue{position:absolute; left:var(--gutter); bottom:28px; display:flex; align-items:center; gap:12px;
+  color:var(--text-muted); font-size:12px; letter-spacing:.18em; text-transform:uppercase}
+.scrollcue .bar{width:1px; height:42px; background:linear-gradient(var(--accent), transparent); position:relative; overflow:hidden}
+.scrollcue .bar::after{content:""; position:absolute; top:-50%; left:0; width:100%; height:50%; background:var(--accent); animation:drop 2s var(--ease-out) infinite}
+@keyframes drop{0%{transform:translateY(-100%)}60%,100%{transform:translateY(200%)}}
+
+/* ============================================================ SECTION HEADS */
+.sec{padding:var(--s10) 0}
+.sec-head{max-width:640px; margin-bottom:var(--s8)}
+.kicker{font-size:13px; letter-spacing:.16em; text-transform:uppercase; color:var(--accent); font-weight:600}
+h2{font-size:clamp(30px,4.4vw,52px); line-height:1.04; letter-spacing:-.022em; font-weight:800; margin:16px 0 0}
+.sec-head p{color:var(--text-dim); margin:18px 0 0; font-size:17px; line-height:1.6; max-width:52ch}
+
+/* ============================================================ SERVICES */
+.cards{display:grid; grid-template-columns:repeat(3,1fr); gap:18px}
+.card{position:relative; padding:30px 28px 34px; border:1px solid var(--line); border-radius:var(--r);
+  background:linear-gradient(180deg, rgba(16,41,67,.55), rgba(10,26,43,.35));
+  overflow:hidden; will-change:transform; transform-style:preserve-3d;
+  transition:transform .35s var(--ease-out), border-color .35s, background .35s}
+.card::before{ /* cursor glow */
+  content:""; position:absolute; inset:0; opacity:0; transition:opacity .35s; pointer-events:none;
+  background:radial-gradient(380px circle at var(--mx,50%) var(--my,0%), var(--glow-soft), transparent 60%)}
+.card:hover{border-color:var(--line-strong)}
+.card:hover::before{opacity:1}
+.card .num{font-size:13px; color:var(--accent); font-weight:700; letter-spacing:.1em}
+.card h3{font-size:21px; font-weight:700; letter-spacing:-.01em; margin:18px 0 0}
+.card p{color:var(--text-muted); margin:10px 0 0; font-size:14.5px; line-height:1.55}
+.card .ic{width:40px; height:40px; margin-top:22px; color:var(--accent); opacity:.9}
+.card .hairtop{position:absolute; left:0; right:0; top:0; height:1px; background:linear-gradient(90deg,transparent, var(--accent), transparent);
+  transform:scaleX(0); transform-origin:left; transition:transform .5s var(--ease-out)}
+.card:hover .hairtop{transform:scaleX(1)}
+
+/* ============================================================ ABOUT */
+.about-grid{display:grid; grid-template-columns:.9fr 1.1fr; gap:var(--s8); align-items:center}
+.portrait{position:relative; border-radius:18px; overflow:hidden; border:1px solid var(--line-strong);
+  aspect-ratio:4/5; background:var(--navy-850)}
+.portrait img{width:100%; height:100%; object-fit:cover; will-change:transform}
+.portrait::after{content:""; position:absolute; inset:0; background:linear-gradient(180deg, transparent 40%, rgba(8,21,35,.55))}
+.about-copy p{color:var(--text-dim); font-size:16.5px; line-height:1.7; margin:0 0 16px}
+.about-copy p.lead{color:var(--text); font-size:19px}
+.stats{display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:var(--s7);
+  border-top:1px solid var(--line); padding-top:var(--s6)}
+.stat .n{font-size:clamp(34px,5vw,52px); font-weight:800; letter-spacing:-.02em; font-variant-numeric:tabular-nums; line-height:1;
+  background:linear-gradient(180deg,#FBF3E2,#c29540); -webkit-background-clip:text; background-clip:text; color:transparent}
+.stat .l{color:var(--text-muted); font-size:13.5px; margin-top:8px}
+
+/* ============================================================ WHY */
+.why-grid{display:grid; grid-template-columns:repeat(5,1fr); gap:0; border:1px solid var(--line); border-radius:var(--r); overflow:hidden}
+.why{padding:32px 26px; border-right:1px solid var(--line); position:relative; transition:background .35s}
+.why:last-child{border-right:0}
+.why:hover{background:rgba(16,41,67,.5)}
+.why .wn{color:var(--accent); font-size:13px; font-weight:700; letter-spacing:.1em}
+.why h3{font-size:19px; font-weight:700; margin:16px 0 0; letter-spacing:-.01em}
+.why p{color:var(--text-muted); font-size:14px; line-height:1.55; margin:10px 0 0}
+
+/* ============================================================ CONTACT */
+.contact{position:relative}
+.contact-grid{display:grid; grid-template-columns:1fr 1fr; gap:var(--s8); align-items:start}
+.contact h2{max-width:18ch}
+.contact .lead{color:var(--text-dim); font-size:17px; line-height:1.6; margin:20px 0 0; max-width:42ch}
+.contact-actions{margin-top:34px; display:flex; flex-direction:column; gap:18px; align-items:flex-start}
+.bigtel{font-size:clamp(26px,3.4vw,38px); font-weight:800; letter-spacing:-.02em; display:inline-flex; align-items:center; gap:14px}
+.bigtel .pulse{width:11px;height:11px;border-radius:50%;background:var(--accent); box-shadow:0 0 14px var(--glow); animation:pulse 2.4s infinite}
+.trustline{color:var(--text-muted); font-size:14px; display:flex; align-items:center; gap:10px}
+.trustline svg{width:18px;height:18px;color:var(--accent)}
+
+/* form */
+.form{background:linear-gradient(180deg, rgba(16,41,67,.6), rgba(10,26,43,.4)); border:1px solid var(--line-strong);
+  border-radius:18px; padding:32px; position:relative; overflow:hidden}
+.form h3{font-size:22px; font-weight:700; margin:0 0 22px; letter-spacing:-.01em}
+.field{margin-bottom:16px; position:relative}
+.field label{display:block; font-size:13px; color:var(--text-dim); margin-bottom:7px; letter-spacing:.01em}
+.field input,.field select,.field textarea{width:100%; background:rgba(8,21,35,.6); color:var(--text);
+  border:1px solid var(--line-strong); border-radius:11px; padding:13px 14px; font-size:15px; font-family:inherit;
+  transition:border-color .25s, box-shadow .25s; min-height:48px}
+.field textarea{min-height:110px; resize:vertical}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none; border-color:var(--accent); box-shadow:0 0 0 4px var(--glow-soft)}
+.field select{appearance:none; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' fill='none' stroke='%238497AB' stroke-width='2' viewBox='0 0 24 24'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 14px center}
+.field .err{color:#FF9A9A; font-size:12.5px; margin-top:6px; height:0; overflow:hidden; opacity:0; transition:opacity .25s}
+.field.invalid input,.field.invalid select,.field.invalid textarea{border-color:#FF8A8A}
+.field.invalid .err{height:auto; opacity:1}
+.row2{display:grid; grid-template-columns:1fr 1fr; gap:14px}
+.shake{animation:shake .4s}
+@keyframes shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
+.form .btn-primary{width:100%; margin-top:6px}
+
+.form-success{position:absolute; inset:0; background:linear-gradient(180deg, rgba(16,41,67,.97), rgba(10,26,43,.97));
+  display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:32px;
+  opacity:0; visibility:hidden; transform:translateY(10px); transition:opacity .5s var(--ease-out), transform .6s var(--ease-spring), visibility .5s}
+.form-success.show{opacity:1; visibility:visible; transform:none}
+.check{width:74px;height:74px}
+.check circle{fill:none; stroke:var(--accent); stroke-width:3; stroke-dasharray:1; stroke-dashoffset:1}
+.check path{fill:none; stroke:var(--accent); stroke-width:3.5; stroke-linecap:round; stroke-linejoin:round; stroke-dasharray:1; stroke-dashoffset:1}
+.form-success.show .check circle{animation:draw .7s var(--ease-out) forwards}
+.form-success.show .check path{animation:draw .5s var(--ease-out) .5s forwards}
+.form-success h3{margin:20px 0 8px}
+.form-success p{color:var(--text-dim); max-width:34ch; margin:0}
+
+/* ============================================================ FOOTER */
+footer{border-top:1px solid var(--line); margin-top:var(--s10); padding:var(--s9) 0 var(--s7); position:relative; z-index:1}
+.foot-grid{display:grid; grid-template-columns:1.6fr 1fr 1fr 1fr; gap:var(--s7)}
+.foot-brand img{height:30px; margin-bottom:18px}
+.foot-brand p{color:var(--text-muted); font-size:14.5px; line-height:1.6; max-width:34ch}
+.foot h4{font-size:13px; letter-spacing:.12em; text-transform:uppercase; color:var(--text-dim); margin:0 0 16px; font-weight:600}
+.foot ul{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:11px}
+.foot a, .foot li{color:var(--text-muted); font-size:14.5px; transition:color .25s}
+.foot a:hover{color:var(--accent)}
+.foot-bottom{margin-top:var(--s8); padding-top:var(--s5); border-top:1px solid var(--line); display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap; color:var(--text-muted); font-size:13px}
+.foot-bottom a{color:var(--text-dim); transition:color .25s}
+.foot-bottom a:hover{color:var(--accent)}
+
+/* ============================================================ MOBILE ACTION BAR */
+.mbar{position:fixed; left:0; right:0; bottom:0; z-index:120; display:none; gap:10px; padding:10px 12px calc(10px + env(safe-area-inset-bottom));
+  background:rgba(8,21,35,.86); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); border-top:1px solid var(--line-strong);
+  transform:translateY(110%); transition:transform .4s var(--ease-spring)}
+.mbar.show{transform:none}
+.mbar a{flex:1; display:flex; align-items:center; justify-content:center; gap:9px; min-height:50px; border-radius:12px; font-weight:600; font-size:15px}
+.mbar .call{background:transparent; border:1px solid var(--line-strong); color:var(--text)}
+.mbar .quote{background:var(--accent); color:var(--on-accent)}
+.mbar svg{width:18px;height:18px}
+
+/* ============================================================ REVEAL SYSTEM */
+.reveal{opacity:0; transform:translateY(26px); transition:opacity .7s var(--ease-out), transform .8s var(--ease-spring)}
+.reveal.in{opacity:1; transform:none}
+.reveal[data-d="1"]{transition-delay:.08s}
+.reveal[data-d="2"]{transition-delay:.16s}
+.reveal[data-d="3"]{transition-delay:.24s}
+.reveal[data-d="4"]{transition-delay:.32s}
+.reveal[data-d="5"]{transition-delay:.4s}
+
+/* hero load orchestration (spring stagger) */
+.hl{opacity:0; transform:translateY(22px); animation:hin .9s var(--ease-spring) forwards}
+.hl.a{animation-delay:.05s}.hl.b{animation-delay:.18s}.hl.c{animation-delay:.32s}
+.hl.d{animation-delay:.46s}.hl.e{animation-delay:.6s}.hl.f{animation-delay:.74s}
+@keyframes hin{to{opacity:1; transform:none}}
+
+/* ============================================================ RESPONSIVE */
+@media (max-width:980px){
+  .hero-grid{grid-template-columns:1fr; gap:var(--s7)}
+  .hero-art{max-width:440px; margin-inline:auto; order:-1}
+  .cards{grid-template-columns:repeat(2,1fr)}
+  .about-grid{grid-template-columns:1fr; gap:var(--s7)}
+  .why-grid{grid-template-columns:repeat(2,1fr)}
+  .why{border-right:1px solid var(--line); border-bottom:1px solid var(--line)}
+  .contact-grid{grid-template-columns:1fr; gap:var(--s7)}
+  .foot-grid{grid-template-columns:1fr 1fr; gap:var(--s6)}
+  .nav-links,.nav-tel{display:none}
+}
+@media (max-width:600px){
+  .sec{padding:var(--s9) 0}
+  .cards{grid-template-columns:1fr}
+  .why-grid{grid-template-columns:1fr}
+  .row2{grid-template-columns:1fr}
+  .foot-grid{grid-template-columns:1fr}
+  .mbar{display:flex}
+  body{padding-bottom:74px}
+  .scrollcue{display:none}
+  .nav-actions .btn-ghost{display:none}
+}
+
+/* ============================================================ REDUCED MOTION — calm, fully functional */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none !important; transition:none !important}
+  .reveal,.hl{opacity:1 !important; transform:none !important}
+  .draw{stroke-dashoffset:0 !important}
+  .node{opacity:1 !important}
+  .sun,.rays,.win{opacity:1 !important}
+  .cell{opacity:.85 !important}
+  .bar{opacity:1 !important}
+  .smil{display:none !important}
+  .check circle,.check path{stroke-dashoffset:0 !important}
+  .beam::before{display:none}
+  .bg-field::after{opacity:.5}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#services">Skip to content</a>
+<div class="bg-field" aria-hidden="true"></div>
+
+<!-- ============ NAV ============ -->
+<header class="nav" id="nav">
+  <div class="nav-inner">
+    <a class="brand" href="#top" aria-label="Lighthouse Electrical home">
+      <!-- REAL LOGO, unmodified. If your mark is dark, supply a light variant — not recoloured here. -->
+      <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Logo_09-fKMYXXW58mPo3X9flr3UpjrHYs5Xml.svg" alt="Lighthouse Electrical" />
+    </a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#services">Services</a>
+      <a href="#about">About</a>
+      <a href="#why-us">Why Us</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="nav-actions">
+      <a class="nav-tel" href="tel:0451020862">0451&nbsp;020&nbsp;862</a>
+      <a class="btn btn-primary min44" data-magnetic href="#contact">Get a Quote</a>
+    </div>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<main id="top">
+<section class="hero" aria-label="Introduction">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <span class="eyebrow hl a"><span class="dot"></span> Newcastle&rsquo;s Trusted Electricians</span>
+      <h1 class="hero-title">
+        <span class="ln"><span class="hl b">Reliable Electrical</span></span>
+        <span class="ln"><span class="hl c grad">Done&nbsp;Properly.</span></span>
+      </h1>
+      <p class="hero-sub hl d">Premium electrical, solar and battery solutions across residential and commercial projects throughout the Hunter.</p>
+      <div class="hero-cta hl e">
+        <a class="btn btn-primary min44" data-magnetic href="#contact">Get a Quote <span class="arr" aria-hidden="true">&rarr;</span></a>
+        <a class="btn btn-ghost min44" href="#services">Our Services</a>
+      </div>
+      <div class="hero-trust hl f">
+        <span>Fully licensed &amp; insured</span><span class="sep"></span>
+        <span>Newcastle &middot; Lake Macquarie &middot; Maitland</span><span class="sep"></span>
+        <span>Port Stephens &middot; Hunter Valley</span>
+      </div>
+    </div>
+
+    <!-- SIGNATURE: Blayke's work — sun charges the panel, current fills the battery, the home lights up. -->
+    <div class="hero-art" aria-hidden="true">
+      <svg viewBox="0 0 400 400" role="presentation">
+        <circle class="ring" cx="200" cy="200" r="172" opacity=".3"></circle>
+
+        <!-- SUN (top-right) -->
+        <g class="raygrp"><g class="rays">
+          <line class="ray" x1="325" y1="40" x2="325" y2="50"></line>
+          <line class="ray" x1="325" y1="90" x2="325" y2="100"></line>
+          <line class="ray" x1="295" y1="70" x2="305" y2="70"></line>
+          <line class="ray" x1="345" y1="70" x2="355" y2="70"></line>
+          <line class="ray" x1="304" y1="49" x2="311" y2="56"></line>
+          <line class="ray" x1="339" y1="84" x2="346" y2="91"></line>
+          <line class="ray" x1="346" y1="49" x2="339" y2="56"></line>
+          <line class="ray" x1="311" y1="84" x2="304" y2="91"></line>
+        </g></g>
+        <circle class="sun" cx="325" cy="70" r="15"></circle>
+
+        <!-- SOLAR PANEL (top-left, tilted) -->
+        <path class="draw" pathLength="1" d="M60 135 L180 110 L200 152 L80 177 Z"></path>
+        <path class="draw d2" pathLength="1" d="M100 127 L120 169" opacity=".5"></path>
+        <path class="draw d2" pathLength="1" d="M140 119 L160 161" opacity=".5"></path>
+        <path class="draw d2" pathLength="1" d="M70 156 L190 131" opacity=".4"></path>
+        <!-- panel cells lighting in sequence -->
+        <circle class="cell" cx="88"  cy="143" r="4" style="animation-delay:1.00s"></circle>
+        <circle class="cell" cx="120" cy="137" r="4" style="animation-delay:1.12s"></circle>
+        <circle class="cell" cx="152" cy="131" r="4" style="animation-delay:1.24s"></circle>
+        <circle class="cell" cx="178" cy="125" r="4" style="animation-delay:1.36s"></circle>
+        <circle class="cell" cx="96"  cy="162" r="4" style="animation-delay:1.18s"></circle>
+        <circle class="cell" cx="128" cy="156" r="4" style="animation-delay:1.30s"></circle>
+        <circle class="cell" cx="160" cy="150" r="4" style="animation-delay:1.42s"></circle>
+        <circle class="cell" cx="186" cy="144" r="4" style="animation-delay:1.54s"></circle>
+
+        <!-- WIRE 1: panel → battery -->
+        <path class="draw d2" id="wire1" pathLength="1" d="M195 156 C 235 180 250 178 286 200"></path>
+
+        <!-- BATTERY (right) -->
+        <rect class="draw d3" pathLength="1" x="270" y="200" width="70" height="122" rx="12"></rect>
+        <rect class="draw d3" pathLength="1" x="296" y="192" width="18" height="10" rx="3"></rect>
+        <!-- charge bars fill bottom → top -->
+        <rect class="bar" x="282" y="298" width="46" height="18" rx="4" style="animation-delay:2.4s"></rect>
+        <rect class="bar" x="282" y="274" width="46" height="18" rx="4" style="animation-delay:2.7s"></rect>
+        <rect class="bar" x="282" y="250" width="46" height="18" rx="4" style="animation-delay:3.0s"></rect>
+        <rect class="bar" x="282" y="226" width="46" height="18" rx="4" style="animation-delay:3.3s"></rect>
+
+        <!-- WIRE 2: battery → home -->
+        <path class="draw d3" id="wire2" pathLength="1" d="M300 320 C 255 350 210 340 178 330"></path>
+
+        <!-- HOME (bottom-left) -->
+        <path class="draw d3" pathLength="1" d="M58 282 L120 236 L182 282"></path>
+        <path class="draw d3" pathLength="1" d="M68 282 L68 350 L172 350 L172 282"></path>
+        <path class="draw d3" pathLength="1" d="M108 350 L108 318 L132 318 L132 350"></path>
+        <!-- windows glow when powered -->
+        <rect class="win" x="80"  y="298" width="22" height="20" rx="3" style="animation-delay:3.6s"></rect>
+        <rect class="win" x="138" y="298" width="22" height="20" rx="3" style="animation-delay:3.75s"></rect>
+
+        <!-- CURRENT pulses (current flowing) -->
+        <circle class="pulse smil" r="3"><animateMotion dur="1.5s" begin="1.8s"  repeatCount="indefinite"><mpath href="#wire1"></mpath></animateMotion></circle>
+        <circle class="pulse smil" r="3"><animateMotion dur="1.5s" begin="2.55s" repeatCount="indefinite"><mpath href="#wire1"></mpath></animateMotion></circle>
+        <circle class="pulse smil" r="3"><animateMotion dur="1.7s" begin="3.4s"  repeatCount="indefinite"><mpath href="#wire2"></mpath></animateMotion></circle>
+      </svg>
+    </div>
+  </div>
+  <a class="scrollcue" href="#services" aria-label="Scroll to services"><span class="bar"></span> Scroll</a>
+</section>
+
+<!-- ============ SERVICES ============ -->
+<section class="sec" id="services" aria-label="Services">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="kicker reveal">What We Do</span>
+      <h2 class="reveal" data-d="1">Our Services</h2>
+      <p class="reveal" data-d="2">From solar installations to commercial fit-outs, we deliver premium electrical solutions with precision and care.</p>
+    </div>
+    <div class="cards">
+      <article class="card reveal" data-tilt><span class="hairtop"></span><span class="num">01</span>
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/></svg>
+        <h3>Solar Installation</h3><p>Premium solar systems designed for maximum efficiency and long-term savings.</p></article>
+      <article class="card reveal" data-d="1" data-tilt><span class="hairtop"></span><span class="num">02</span>
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="7" width="16" height="12" rx="2"/><path d="M9 7V5h6v2M9 13l2 2 3-4"/></svg>
+        <h3>Battery Systems</h3><p>Store your solar energy with cutting-edge battery solutions for 24/7 power.</p></article>
+      <article class="card reveal" data-d="2" data-tilt><span class="hairtop"></span><span class="num">03</span>
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 11l9-7 9 7M5 10v10h14V10M10 20v-6h4v6"/></svg>
+        <h3>Residential</h3><p>Complete electrical services for homes, from new builds to renovations.</p></article>
+      <article class="card reveal" data-tilt><span class="hairtop"></span><span class="num">04</span>
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-5h6v5M9 11h.01M15 11h.01"/></svg>
+        <h3>Commercial</h3><p>Large-scale electrical solutions for businesses and commercial properties.</p></article>
+      <article class="card reveal" data-d="1" data-tilt><span class="hairtop"></span><span class="num">05</span>
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M14 2l-2 7h5l-7 13 2-9H8l4-11z"/></svg>
+        <h3>Maintenance</h3><p>Regular maintenance and emergency repairs to keep your systems running.</p></article>
+      <article class="card reveal" data-d="2" data-tilt><span class="hairtop"></span><span class="num">06</span>
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 7h8M8 11h8M8 15h4"/></svg>
+        <h3>Switchboards</h3><p>Modern switchboard upgrades for safety and compliance.</p></article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section class="sec" id="about" aria-label="About Blayke">
+  <div class="wrap about-grid">
+    <div class="portrait reveal">
+      <img id="portrait" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/MEETBLAYKE-rAAlFG4VmxCq9Lmvakk9JwCF1QFVtJ.png" alt="Blayke, founder of Lighthouse Electrical" width="800" height="1000" loading="lazy" />
+    </div>
+    <div class="about-copy">
+      <span class="kicker reveal">About Us</span>
+      <h2 class="reveal" data-d="1">Meet Blayke</h2>
+      <p class="lead reveal" data-d="1" style="margin-top:22px">Born and bred in Newcastle, Blayke built Lighthouse Electrical around honest work, reliability and quality workmanship.</p>
+      <p class="reveal" data-d="2">What started as a passion for solving problems and helping people has grown into a trusted local business serving both homeowners and commercial clients across the Hunter region.</p>
+      <p class="reveal" data-d="2">Premium workmanship without the ego. Someone clients instantly trust. That&rsquo;s the Lighthouse way.</p>
+      <div class="stats reveal" data-d="3">
+        <div class="stat"><div class="n" data-count="35" data-suffix="+">0</div><div class="l">Projects Completed</div></div>
+        <div class="stat"><div class="n" data-count="100" data-suffix="%">0</div><div class="l">Satisfaction Rate</div></div>
+        <div class="stat"><div class="n" data-text="24/7">0</div><div class="l">Emergency Support</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WHY ============ -->
+<section class="sec" id="why-us" aria-label="Why choose us">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="kicker reveal">The Lighthouse Difference</span>
+      <h2 class="reveal" data-d="1">Why Choose Us</h2>
+      <p class="reveal" data-d="2">We&rsquo;re not just another electrical company. Here&rsquo;s what sets Lighthouse apart.</p>
+    </div>
+    <div class="why-grid reveal" data-d="1">
+      <div class="why"><span class="wn">01</span><h3>Honest</h3><p>Transparent pricing with no hidden fees. We tell it like it is.</p></div>
+      <div class="why"><span class="wn">02</span><h3>Reliable</h3><p>We show up on time, every time. Your schedule matters to us.</p></div>
+      <div class="why"><span class="wn">03</span><h3>Local</h3><p>Born and bred Newcastle. We know and love this community.</p></div>
+      <div class="why"><span class="wn">04</span><h3>High-End Workmanship</h3><p>Premium quality on every job. We don&rsquo;t cut corners.</p></div>
+      <div class="why"><span class="wn">05</span><h3>Commercial Capability</h3><p>From homes to high-rises. We scale with your needs.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section class="sec contact" id="contact" aria-label="Contact and quote">
+  <div class="wrap contact-grid">
+    <div>
+      <span class="kicker reveal">Get In Touch</span>
+      <h2 class="reveal" data-d="1">Need an electrician you can actually rely on?</h2>
+      <p class="lead reveal" data-d="2">Whether it&rsquo;s a small job or a large-scale project, we&rsquo;re here to help. Get in touch for a free, no-obligation quote.</p>
+      <div class="contact-actions reveal" data-d="3">
+        <a class="bigtel" href="tel:0451020862"><span class="pulse"></span>0451 020 862</a>
+        <span class="trustline">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6l8-4z"/><path d="M9 12l2 2 4-4"/></svg>
+          Fully licensed and insured &middot; Serving Newcastle &amp; the Hunter Region
+        </span>
+      </div>
+    </div>
+
+    <div class="form reveal" data-d="2">
+      <h3>Request a Quote</h3>
+      <form id="quoteForm" novalidate>
+        <div class="row2">
+          <div class="field"><label for="f-name">Name</label><input id="f-name" name="name" type="text" autocomplete="name" required /><div class="err">Please enter your name.</div></div>
+          <div class="field"><label for="f-phone">Phone</label><input id="f-phone" name="phone" type="tel" autocomplete="tel" required /><div class="err">Please enter a contact number.</div></div>
+        </div>
+        <div class="field"><label for="f-email">Email</label><input id="f-email" name="email" type="email" autocomplete="email" required /><div class="err">Please enter a valid email.</div></div>
+        <div class="field"><label for="f-service">Service</label>
+          <select id="f-service" name="service" required>
+            <option value="">Select a service</option>
+            <option>Solar Installation</option><option>Battery Systems</option><option>Residential</option>
+            <option>Commercial</option><option>Maintenance</option><option>Switchboards</option>
+          </select><div class="err">Please choose a service.</div>
+        </div>
+        <div class="field"><label for="f-msg">Message</label><textarea id="f-msg" name="message" placeholder="Tell us about your project…"></textarea><div class="err"></div></div>
+        <button class="btn btn-primary min44" type="submit">Send Message <span class="arr" aria-hidden="true">&rarr;</span></button>
+      </form>
+      <div class="form-success" id="formSuccess" role="status" aria-live="polite">
+        <svg class="check" viewBox="0 0 52 52"><circle cx="26" cy="26" r="24"/><path d="M16 27l7 7 14-15"/></svg>
+        <h3>Thanks — we&rsquo;ll be in touch.</h3>
+        <p>Your request has reached Lighthouse Electrical. We&rsquo;ll get back to you shortly with your free quote.</p>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer aria-label="Footer">
+  <div class="wrap foot-grid">
+    <div class="foot-brand">
+      <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Logo_09-fKMYXXW58mPo3X9flr3UpjrHYs5Xml.svg" alt="Lighthouse Electrical" />
+      <p>Premium electrical, solar and battery solutions across residential and commercial projects in Newcastle.</p>
+    </div>
+    <div class="foot"><h4>Quick Links</h4><ul>
+      <li><a href="#services">Services</a></li><li><a href="#about">About</a></li>
+      <li><a href="#why-us">Why Us</a></li><li><a href="#contact">Contact</a></li>
+    </ul></div>
+    <div class="foot"><h4>Service Areas</h4><ul>
+      <li>Newcastle</li><li>Lake Macquarie</li><li>Maitland</li><li>Port Stephens</li><li>Hunter Valley</li><li>Central Coast</li>
+    </ul></div>
+    <div class="foot"><h4>Contact Us</h4><ul>
+      <li><a href="tel:0451020862">0451 020 862</a></li>
+      <li><a href="mailto:sales@lighthouseelec.com.au">sales@lighthouseelec.com.au</a></li>
+      <li>Newcastle, NSW 2300</li>
+    </ul></div>
+  </div>
+  <div class="wrap foot-bottom">
+    <span>&copy; 2026 Lighthouse Electrical. All rights reserved.</span>
+    <span>Powered by <a href="https://jtbassetgroup.com" target="_blank" rel="noopener">JTB Asset Group</a></span>
+  </div>
+</footer>
+
+<!-- ============ MOBILE PERSISTENT ACTION BAR ============ -->
+<div class="mbar" id="mbar" aria-label="Quick actions">
+  <a class="call" href="tel:0451020862"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.4-1.2a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>Call</a>
+  <a class="quote" href="#contact">Get a Quote</a>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion:reduce)").matches;
+  if(reduce){ document.querySelectorAll(".smil").forEach(function(n){ n.style.display="none"; }); }
+
+  /* ---- nav scrolled state ---- */
+  var nav = document.getElementById("nav");
+  var onScroll = function(){
+    if(window.scrollY > 24) nav.classList.add("scrolled"); else nav.classList.remove("scrolled");
+    var past = window.scrollY > window.innerHeight * 0.7;
+    var mbar = document.getElementById("mbar");
+    if(mbar){ if(past) mbar.classList.add("show"); else mbar.classList.remove("show"); }
+  };
+  window.addEventListener("scroll", onScroll, {passive:true}); onScroll();
+
+  /* ---- reveal on scroll (IntersectionObserver) ---- */
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); }});
+  }, {threshold:0.16, rootMargin:"0px 0px -8% 0px"});
+  document.querySelectorAll(".reveal").forEach(function(el){
+    if(reduce){ el.classList.add("in"); } else { io.observe(el); }
+  });
+
+  /* ---- animated counters ---- */
+  function animateCount(el){
+    if(el.dataset.text){ el.textContent = el.dataset.text; return; }
+    var target = parseInt(el.dataset.count,10), suf = el.dataset.suffix||"", t0=null, dur=1400;
+    if(reduce){ el.textContent = target + suf; return; }
+    function step(t){ if(!t0)t0=t; var p=Math.min((t-t0)/dur,1); var eased=1-Math.pow(1-p,3);
+      el.textContent = Math.round(target*eased) + suf; if(p<1) requestAnimationFrame(step); }
+    requestAnimationFrame(step);
+  }
+  var cio = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting){ animateCount(e.target); cio.unobserve(e.target); }});
+  }, {threshold:0.6});
+  document.querySelectorAll("[data-count],[data-text]").forEach(function(el){ cio.observe(el); });
+
+  /* ---- magnetic buttons (transform only) ---- */
+  if(!reduce && matchMedia("(pointer:fine)").matches){
+    document.querySelectorAll("[data-magnetic]").forEach(function(btn){
+      btn.addEventListener("pointermove", function(ev){
+        var r=btn.getBoundingClientRect();
+        var x=(ev.clientX-r.left-r.width/2)*0.25, y=(ev.clientY-r.top-r.height/2)*0.4;
+        btn.style.transform="translate("+x+"px,"+y+"px)";
+      });
+      btn.addEventListener("pointerleave", function(){ btn.style.transform=""; });
+    });
+
+    /* ---- cursor-aware card glow + subtle tilt ---- */
+    document.querySelectorAll("[data-tilt]").forEach(function(card){
+      card.addEventListener("pointermove", function(ev){
+        var r=card.getBoundingClientRect();
+        var px=(ev.clientX-r.left)/r.width, py=(ev.clientY-r.top)/r.height;
+        card.style.setProperty("--mx",(px*100)+"%");
+        card.style.setProperty("--my",(py*100)+"%");
+        card.style.transform="perspective(900px) rotateX("+((0.5-py)*5).toFixed(2)+"deg) rotateY("+((px-0.5)*6).toFixed(2)+"deg) translateY(-4px)";
+      });
+      card.addEventListener("pointerleave", function(){ card.style.transform=""; });
+    });
+
+    /* ---- parallax on portrait (transform only) ---- */
+    var portrait=document.getElementById("portrait");
+    if(portrait){
+      var pio=new IntersectionObserver(function(en){
+        en.forEach(function(e){ portrait._vis=e.isIntersecting; });
+      },{threshold:0});
+      pio.observe(portrait);
+      window.addEventListener("scroll", function(){
+        if(!portrait._vis) return;
+        var r=portrait.getBoundingClientRect();
+        var off=((r.top+r.height/2)-window.innerHeight/2)/window.innerHeight;
+        portrait.style.transform="scale(1.08) translateY("+(off*-22).toFixed(1)+"px)";
+      },{passive:true});
+    }
+  }
+
+  /* ---- form validation + success-state motion ---- */
+  var form=document.getElementById("quoteForm");
+  function validate(field){
+    var input=field.querySelector("input,select,textarea"); if(!input||!input.hasAttribute("required")) return true;
+    var ok = input.value.trim()!=="";
+    if(ok && input.type==="email"){ ok=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input.value.trim()); }
+    field.classList.toggle("invalid", !ok);
+    input.setAttribute("aria-invalid", ok ? "false":"true");
+    return ok;
+  }
+  if(form){
+    form.querySelectorAll(".field").forEach(function(f){
+      var input=f.querySelector("input,select,textarea");
+      if(input) input.addEventListener("blur", function(){ validate(f); });
+    });
+    form.addEventListener("submit", function(ev){
+      ev.preventDefault();
+      var fields=Array.prototype.slice.call(form.querySelectorAll(".field"));
+      var allOk=true, firstBad=null;
+      fields.forEach(function(f){ var ok=validate(f); if(!ok){ allOk=false; if(!firstBad) firstBad=f; }});
+      if(!allOk){
+        if(!reduce && firstBad){ firstBad.classList.remove("shake"); void firstBad.offsetWidth; firstBad.classList.add("shake"); }
+        if(firstBad){ var i=firstBad.querySelector("input,select,textarea"); if(i) i.focus(); }
+        return;
+      }
+      /* NOTE: visual layer only — no backend wired. Hook your real submit/POST here. */
+      document.getElementById("formSuccess").classList.add("show");
+    });
+  }
+})();
+</script>
+</body>
+</html>
