@@ -706,6 +706,7 @@ footer{border-top:1px solid var(--line); margin-top:var(--s10); padding:var(--s9
       var input=f.querySelector("input,select,textarea");
       if(input) input.addEventListener("blur", function(){ validate(f); });
     });
+    var submitBtn = form.querySelector("button[type='submit']");
     form.addEventListener("submit", function(ev){
       ev.preventDefault();
       var fields=Array.prototype.slice.call(form.querySelectorAll(".field"));
@@ -716,8 +717,34 @@ footer{border-top:1px solid var(--line); margin-top:var(--s10); padding:var(--s9
         if(firstBad){ var i=firstBad.querySelector("input,select,textarea"); if(i) i.focus(); }
         return;
       }
-      /* NOTE: visual layer only — no backend wired. Hook your real submit/POST here. */
-      document.getElementById("formSuccess").classList.add("show");
+
+      /* ---- Web3Forms submission ---- */
+      var data = new FormData(form);
+      data.append("access_key", "218285d0-0f39-4b0d-9cb5-8d697b6aa301");
+      data.append("subject", "New quote request — Lighthouse Electrical");
+      data.append("from_name", "Lighthouse Electrical Website");
+
+      var originalHTML = submitBtn.innerHTML;
+      submitBtn.textContent = "Sending…";
+      submitBtn.disabled = true;
+
+      fetch("https://api.web3forms.com/submit", { method:"POST", body:data })
+        .then(function(r){ return r.json(); })
+        .then(function(res){
+          if(res.success){
+            document.getElementById("formSuccess").classList.add("show");
+            form.reset();
+          } else {
+            window.alert("Sorry — something went wrong: " + (res.message || "please try again or call us."));
+          }
+        })
+        .catch(function(){
+          window.alert("Sorry — your message didn't send. Please try again or call us on 0451 020 862.");
+        })
+        .finally(function(){
+          submitBtn.innerHTML = originalHTML;
+          submitBtn.disabled = false;
+        });
     });
   }
 })();
