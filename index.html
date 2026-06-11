@@ -130,10 +130,9 @@ section{position:relative; z-index:1}
 /* ============================================================ NAV */
 .nav{position:fixed; inset:0 0 auto 0; z-index:100; transition:background .4s var(--ease-out), border-color .4s var(--ease-out)}
 .nav-inner{max-width:var(--maxw); margin-inline:auto; padding:18px var(--gutter);
-  display:flex; align-items:center; gap:var(--s5); transition:padding .35s var(--ease-out)}
+  display:flex; align-items:center; justify-content:center; gap:var(--s5); transition:padding .35s var(--ease-out)}
 .nav.scrolled{background:rgba(8,21,35,.72); backdrop-filter:blur(14px) saturate(140%); -webkit-backdrop-filter:blur(14px) saturate(140%); border-bottom:1px solid var(--line)}
 .nav.scrolled .nav-inner{padding-top:12px; padding-bottom:12px}
-.brand{margin-right:auto}
 .nav-links{display:flex; gap:var(--s6); align-items:center}
 .nav-links a{font-size:14.5px; color:var(--text-dim); position:relative; padding:6px 0; letter-spacing:.01em}
 .nav-links a::after{content:""; position:absolute; left:0; right:0; bottom:0; height:1.5px; background:var(--accent);
@@ -383,7 +382,6 @@ footer{border-top:1px solid var(--line); margin-top:var(--s10); padding:var(--s9
 <!-- ============ NAV ============ -->
 <header class="nav" id="nav">
   <div class="nav-inner">
-    <a class="brand" href="#top" aria-label="Lighthouse Electrical home"></a>
     <nav class="nav-links" aria-label="Primary">
       <a href="#services">Services</a>
       <a href="#about">About</a>
