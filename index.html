@@ -7,20 +7,14 @@
 <title>Lighthouse Electrical | Premium Electrical Services Newcastle</title>
 <meta name="description" content="Premium electrical, solar and battery solutions across residential and commercial projects in Newcastle, NSW. Reliable electrical done properly." />
 
-<!-- Brand logo: browser tab / bookmark / home-screen icons -->
-<link rel="icon" type="image/svg+xml" href="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Logo_09-fKMYXXW58mPo3X9flr3UpjrHYs5Xml.svg" />
-<link rel="apple-touch-icon" href="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Logo_09-fKMYXXW58mPo3X9flr3UpjrHYs5Xml.svg" />
-
-<!-- Brand logo: social share / link preview (Facebook, WhatsApp, LinkedIn, X) -->
+<!-- Social share / link preview (Facebook, WhatsApp, LinkedIn, X) -->
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Lighthouse Electrical" />
 <meta property="og:title" content="Lighthouse Electrical | Premium Electrical Services Newcastle" />
 <meta property="og:description" content="Premium electrical, solar and battery solutions across residential and commercial projects in Newcastle, NSW. Reliable electrical done properly." />
-<meta property="og:image" content="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Logo_09-fKMYXXW58mPo3X9flr3UpjrHYs5Xml.svg" />
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content="Lighthouse Electrical | Premium Electrical Services Newcastle" />
 <meta name="twitter:description" content="Reliable electrical done properly — solar, battery and commercial across Newcastle & the Hunter." />
-<meta name="twitter:image" content="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Logo_09-fKMYXXW58mPo3X9flr3UpjrHYs5Xml.svg" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -117,7 +111,8 @@ section{position:relative; z-index:1}
 .nav.scrolled{background:rgba(8,21,35,.72); backdrop-filter:blur(14px) saturate(140%); -webkit-backdrop-filter:blur(14px) saturate(140%); border-bottom:1px solid var(--line)}
 .nav.scrolled .nav-inner{padding-top:12px; padding-bottom:12px}
 .brand{display:flex; align-items:center; gap:10px; margin-right:auto}
-.brand img{height:52px; width:auto}
+.wordmark{font-size:21px; font-weight:800; letter-spacing:-.02em; color:var(--text); white-space:nowrap; line-height:1}
+.wordmark-accent{color:var(--accent)}
 .nav-links{display:flex; gap:var(--s6); align-items:center}
 .nav-links a{font-size:14.5px; color:var(--text-dim); position:relative; padding:6px 0; letter-spacing:.01em}
 .nav-links a::after{content:""; position:absolute; left:0; right:0; bottom:0; height:1.5px; background:var(--accent);
@@ -296,7 +291,7 @@ h2{font-size:clamp(30px,4.4vw,52px); line-height:1.04; letter-spacing:-.022em; f
 /* ============================================================ FOOTER */
 footer{border-top:1px solid var(--line); margin-top:var(--s10); padding:var(--s9) 0 var(--s7); position:relative; z-index:1}
 .foot-grid{display:grid; grid-template-columns:1.6fr 1fr 1fr 1fr; gap:var(--s7)}
-.foot-brand img{height:46px; margin-bottom:18px}
+.foot-wordmark{display:inline-block; margin-bottom:18px; font-size:19px}
 .foot-brand p{color:var(--text-muted); font-size:14.5px; line-height:1.6; max-width:34ch}
 .foot h4{font-size:13px; letter-spacing:.12em; text-transform:uppercase; color:var(--text-dim); margin:0 0 16px; font-weight:600}
 .foot ul{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:11px}
@@ -379,8 +374,7 @@ footer{border-top:1px solid var(--line); margin-top:var(--s10); padding:var(--s9
 <header class="nav" id="nav">
   <div class="nav-inner">
     <a class="brand" href="#top" aria-label="Lighthouse Electrical home">
-      <!-- REAL LOGO, unmodified. If your mark is dark, supply a light variant — not recoloured here. -->
-      <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Logo_09-fKMYXXW58mPo3X9flr3UpjrHYs5Xml.svg" alt="Lighthouse Electrical" />
+      <span class="wordmark">Lighthouse <span class="wordmark-accent">Electrical</span></span>
     </a>
     <nav class="nav-links" aria-label="Primary">
       <a href="#services">Services</a>
@@ -602,7 +596,7 @@ footer{border-top:1px solid var(--line); margin-top:var(--s10); padding:var(--s9
 <footer aria-label="Footer">
   <div class="wrap foot-grid">
     <div class="foot-brand">
-      <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Logo_09-fKMYXXW58mPo3X9flr3UpjrHYs5Xml.svg" alt="Lighthouse Electrical" />
+      <span class="wordmark foot-wordmark">Lighthouse <span class="wordmark-accent">Electrical</span></span>
       <p>Premium electrical, solar and battery solutions across residential and commercial projects in Newcastle.</p>
     </div>
     <div class="foot"><h4>Quick Links</h4><ul>
