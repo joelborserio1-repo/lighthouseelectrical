@@ -117,7 +117,7 @@ section{position:relative; z-index:1}
 .nav.scrolled{background:rgba(8,21,35,.72); backdrop-filter:blur(14px) saturate(140%); -webkit-backdrop-filter:blur(14px) saturate(140%); border-bottom:1px solid var(--line)}
 .nav.scrolled .nav-inner{padding-top:12px; padding-bottom:12px}
 .brand{display:flex; align-items:center; gap:10px; margin-right:auto}
-.brand img{height:34px; width:auto}
+.brand img{height:52px; width:auto}
 .nav-links{display:flex; gap:var(--s6); align-items:center}
 .nav-links a{font-size:14.5px; color:var(--text-dim); position:relative; padding:6px 0; letter-spacing:.01em}
 .nav-links a::after{content:""; position:absolute; left:0; right:0; bottom:0; height:1.5px; background:var(--accent);
@@ -296,7 +296,7 @@ h2{font-size:clamp(30px,4.4vw,52px); line-height:1.04; letter-spacing:-.022em; f
 /* ============================================================ FOOTER */
 footer{border-top:1px solid var(--line); margin-top:var(--s10); padding:var(--s9) 0 var(--s7); position:relative; z-index:1}
 .foot-grid{display:grid; grid-template-columns:1.6fr 1fr 1fr 1fr; gap:var(--s7)}
-.foot-brand img{height:30px; margin-bottom:18px}
+.foot-brand img{height:46px; margin-bottom:18px}
 .foot-brand p{color:var(--text-muted); font-size:14.5px; line-height:1.6; max-width:34ch}
 .foot h4{font-size:13px; letter-spacing:.12em; text-transform:uppercase; color:var(--text-dim); margin:0 0 16px; font-weight:600}
 .foot ul{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:11px}
@@ -582,6 +582,7 @@ footer{border-top:1px solid var(--line); margin-top:var(--s10); padding:var(--s9
             <option value="">Select a service</option>
             <option>Solar Installation</option><option>Battery Systems</option><option>Residential</option>
             <option>Commercial</option><option>Maintenance</option><option>Switchboards</option>
+            <option>Other</option>
           </select><div class="err">Please choose a service.</div>
         </div>
         <div class="field"><label for="f-msg">Message</label><textarea id="f-msg" name="message" placeholder="Tell us about your project…"></textarea><div class="err"></div></div>
